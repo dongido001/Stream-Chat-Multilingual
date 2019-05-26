@@ -3,12 +3,12 @@
     <div class="form">
       <form @submit.prevent="login">
         <input
+          v-model="username"
           type="text"
           class="input"
           placeholder="Enter a username"
-          v-model="username"
           required
-        />
+        >
         <button
           type="submit"
           class="submit"
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "login",
+  name: "Login",
   props: ["status"],
   data() {
     return {

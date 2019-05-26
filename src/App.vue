@@ -1,37 +1,55 @@
 <template>
-	<div id="app">
-		<div v-if="!authenticated">
-			<Login @login="setAuthenticated"/>
-		</div>
-		<div class="main" v-else>
-			<Channels 
-			    @joinChannel="setActiveChannel"
-				:channels="channels"
-				@createChannel="createChannel"
-			/>
-			<div class="message-area">
-				<div class="message-header">
-					<div class="message-header-left"> Chatx </div>
-					<div class="message-header-right">
-						<select v-model="language" class="language" @change="translateLanguage">
-							<option value="en" selected> English </option>
-							<option value="fr"> French </option>
-							<option value="de"> German </option>
-						</select>
-					</div>
-				</div>
-				<Messages 
-				    :messages="messages" 
-                    :userId="userId"
-				/>
-				<InputForm
-					@newMessage="sendMessage"
-					@joinedRoom="joinedRoom = true"
-					:activeChannel="activeChannel"
-				/>
-			</div>
-		</div>
-	</div>
+  <div id="app">
+    <div v-if="!authenticated">
+      <Login @login="setAuthenticated" />
+    </div>
+    <div
+      v-else
+      class="main"
+    >
+      <Channels 
+        :channels="channels"
+        @joinChannel="setActiveChannel"
+        @createChannel="createChannel"
+      />
+      <div class="message-area">
+        <div class="message-header">
+          <div class="message-header-left">
+            Chatx
+          </div>
+          <div class="message-header-right">
+            <select
+              v-model="language"
+              class="language"
+              @change="translateLanguage"
+            >
+              <option
+                value="en"
+                selected
+              >
+                English
+              </option>
+              <option value="fr">
+                French
+              </option>
+              <option value="de">
+                German
+              </option>
+            </select>
+          </div>
+        </div>
+        <Messages 
+          :messages="messages" 
+          :user-id="userId"
+        />
+        <InputForm
+          :active-channel="activeChannel"
+          @newMessage="sendMessage"
+          @joinedRoom="joinedRoom = true"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -46,7 +64,7 @@ import Login from "@/components/Login";
 import "./App.css";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     Messages,
     InputForm,
